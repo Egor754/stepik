@@ -7,13 +7,17 @@ def MainView(request):
 
 
 def DepartureView(request, departure):
-    departures = {"msk": "Из Москвы", "spb": "Из Петербурга",
-                  "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
-                  "kazan": "Из Казани"}
-    if departure not in departures:
-        return HttpResponseNotFound(f"Нет тура с направлением {departure}")
-    return render(request, "tours/departure.html", context=departures)
+    return render(request, "tours/departure.html")
 
 
 def TourView(request, id):
     return render(request, 'tours/tour.html')
+
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+
+def ServerError(request):
+    return HttpResponseServerError('<h1>Извините, произошел '
+                                   'внутрисистемный сбой</h1>')
